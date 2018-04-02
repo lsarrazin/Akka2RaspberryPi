@@ -30,3 +30,23 @@ which leads on the breadboard to
   #23 => Yellow LED
   #24 => Red LED
 (do not forget the resistors)
+
+# Dependency
+The GPIO is addressed through Pi4J (here http://pi4j.com/ or here https://github.com/Pi4J/pi4j/)
+For convenience, it is fetched from sbt through
+
+```scala
+lazy val remoteMavenRepo = "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
+resolvers += remoteMavenRepo
+
+lazy val pi4jVersion = "1.1"
+libraryDependencies += "com.pi4j" % "pi4j-core" % pi4jVersion
+```
+
+On my PI 3B that is not (yet) recognized, I need to push the following definition to the JVM `-Dpi4j.linking=dynamic`
+
+This can easily be done through sbt using
+```ksh
+sbt -Dpi4j.linking=dynamic
+```
+
