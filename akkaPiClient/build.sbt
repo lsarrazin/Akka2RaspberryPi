@@ -17,6 +17,3 @@ libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % "1.1.3",
   "org.scalatest" %% "scalatest" % "3.0.1" % "test"
 )
-
-licenses := Seq(("CC0", url("http://creativecommons.org/publicdomain/zero/1.0")))
-
