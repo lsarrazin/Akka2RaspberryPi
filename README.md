@@ -31,6 +31,8 @@ which leads on the breadboard to
   #24 => Red LED
 (do not forget the resistors)
 
+<img src="https://raw.githubusercontent.com/lsarrazin/Akka2RaspberryPi/master/Breadboard-small.jpg" alt="Breadboard with LEDs" height="277px" width="446px"/>
+
 # Dependency
 The GPIO is addressed through Pi4J (here http://pi4j.com/ or here https://github.com/Pi4J/pi4j/)
 For convenience, it is fetched from sbt through
