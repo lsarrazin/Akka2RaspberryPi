@@ -25,5 +25,3 @@ libraryDependencies += "com.pi4j" % "pi4j-core" % pi4jVersion
 
 javaOptions in Runtime += "-Dpi4j.linking=dynamic" 
 
-licenses := Seq(("CC0", url("http://creativecommons.org/publicdomain/zero/1.0")))
-
