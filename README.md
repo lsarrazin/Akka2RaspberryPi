@@ -27,14 +27,14 @@ The LEDs are wired to the GPIO using the following configuration from PIGpio.sca
 ```
 
 which leads on the breadboard to
-- #22 / Pin15 => Green LED
-- #23 / Pin16 => Yellow LED
-- #24 / Pin18 => Red LED
-- #25 / Pin22 => Blue (control) LED
+- Cobbler #22 / Pin #15 => Green LED
+- Cobbler #23 / Pin #16 => Yellow LED
+- Cobbler #24 / Pin #18 => Red LED
+- Cobbler #25 / Pin #22 => Blue (control) LED
 
 (do not forget the resistors)
 
-My T-cobbler (on the picture) is for an unknown PI model. Pin numbers relate to the Raspberry Pi 3B expansion header. More details on http://pi4j.com/pins/model-3b-rev1.html
+My T-cobbler (on the picture below) is for an unknown PI model. Pin numbers relate to the Raspberry Pi 3B expansion header. More details on http://pi4j.com/pins/model-3b-rev1.html
 
 <img src="https://raw.githubusercontent.com/lsarrazin/Akka2RaspberryPi/master/Breadboard-small.jpg" alt="Breadboard with LEDs" height="277px" width="446px"/>
 
