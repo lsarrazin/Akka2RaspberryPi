@@ -22,14 +22,17 @@ The LEDs are wired to the GPIO using the following configuration from PIGpio.sca
   val leds = List(
     ("gLED", RaspiPin.GPIO_03),
     ("yLED", RaspiPin.GPIO_04),
-    ("rLED", RaspiPin.GPIO_05))
+    ("rLED", RaspiPin.GPIO_05),
+    ("bLED", RaspiPin.GPIO_06))
 ```
 
 which leads on the breadboard to
-  #22 => Green LED
-  #23 => Yellow LED
-  #24 => Red LED
+- #22 / Pin15 => Green LED
+- #23 / Pin16 => Yellow LED
+- #24 / Pin18 => Red LED
+- #25 / Pin22 => Blue (control) LED
 (do not forget the resistors)
+More details on http://pi4j.com/pins/model-3b-rev1.html
 
 <img src="https://raw.githubusercontent.com/lsarrazin/Akka2RaspberryPi/master/Breadboard-small.jpg" alt="Breadboard with LEDs" height="277px" width="446px"/>
 
