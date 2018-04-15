@@ -1,6 +1,5 @@
-package com.example
+package org.lsa.akkapi.http
 
-//#quick-start-server
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
@@ -8,32 +7,25 @@ import akka.actor.{ ActorRef, ActorSystem }
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Route
 import akka.stream.ActorMaterializer
+import com.typesafe.config.ConfigFactory
 
-//#main-class
-object QuickstartServer extends App with UserRoutes {
+object PiHttpServer extends App with LedRoutes {
 
   // set up ActorSystem and other dependencies here
-  //#main-class
-  //#server-bootstrapping
-  implicit val system: ActorSystem = ActorSystem("helloAkkaHttpServer")
+  implicit val system: ActorSystem = ActorSystem("AkkaPiHttpServer", ConfigFactory.load("PI-client"))
   implicit val materializer: ActorMaterializer = ActorMaterializer()
-  //#server-bootstrapping
 
-  val userRegistryActor: ActorRef = system.actorOf(UserRegistryActor.props, "userRegistryActor")
+  val remoteHostPort = "192.168.1.51:2553"
+  val remotePath = s"akka.tcp://Sys@$remoteHostPort/user/raspPi3B"
 
-  //#main-class
+  val ledRegistryActor: ActorRef = system.actorOf(LedRegistryActor.props(remotePath), "ledRegistryActor")
+
   // from the UserRoutes trait
-  lazy val routes: Route = userRoutes
-  //#main-class
+  lazy val routes: Route = ledRoutes
 
-  //#http-server
   Http().bindAndHandle(routes, "localhost", 8080)
 
   println(s"Server online at http://localhost:8080/")
 
   Await.result(system.whenTerminated, Duration.Inf)
-  //#http-server
-  //#main-class
 }
-//#main-class
-//#quick-start-server

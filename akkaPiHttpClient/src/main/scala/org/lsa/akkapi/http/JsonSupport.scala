@@ -1,18 +1,16 @@
-package com.example
+package org.lsa.akkapi.http
 
-import com.example.UserRegistryActor.ActionPerformed
-
-//#json-support
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
-import spray.json.DefaultJsonProtocol
+import spray.json._
 
 trait JsonSupport extends SprayJsonSupport {
+
   // import the default encoders for primitive types (Int, String, Lists etc)
   import DefaultJsonProtocol._
+  import LedRegistryActor._
 
-  implicit val userJsonFormat = jsonFormat3(User)
-  implicit val usersJsonFormat = jsonFormat1(Users)
+  implicit val userJsonFormat = jsonFormat1(Led)
+  implicit val usersJsonFormat = jsonFormat1(Leds)
 
   implicit val actionPerformedJsonFormat = jsonFormat1(ActionPerformed)
 }
-//#json-support
