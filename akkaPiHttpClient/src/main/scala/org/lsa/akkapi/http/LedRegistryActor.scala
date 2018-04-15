@@ -43,7 +43,6 @@ class LedRegistryActor(path: String) extends Actor with ActorLogging {
     Led("Red")
   )
 
-  /*
   override def preStart(): Unit = {
     super.preStart
 
@@ -62,7 +61,6 @@ class LedRegistryActor(path: String) extends Actor with ActorLogging {
   override def postStop(): Unit = {
     log.info(s"PILedClient actor stopping...")
   }
-  */
 
   context.setReceiveTimeout(3.seconds)
   sendIdentifyRequest()
@@ -74,12 +72,12 @@ class LedRegistryActor(path: String) extends Actor with ActorLogging {
 
   def identifying: Receive = {
     case ActorIdentity(`path`, Some(actor)) =>
-      println(s"Remote actor found: $path")
+      log.info(s"Remote actor found: $path")
       context.watch(actor)
       context.become(active(actor))
       context.setReceiveTimeout(Duration.Undefined)
       self ! Reset
-    case ActorIdentity(`path`, None) => println(s"Remote actor not available: $path")
+    case ActorIdentity(`path`, None) => log.warning(s"Remote actor not available: $path")
     case ReceiveTimeout => sendIdentifyRequest()
   }
 
@@ -115,8 +113,17 @@ class LedRegistryActor(path: String) extends Actor with ActorLogging {
       // Get led status
       sender ! ActionPerformed(s"LED ${color} is ???.")
 
+    case Lighted(c: Color) =>
+      log.info(c + " is lighted")
+    
+    case Unlighted(c: Color) =>
+      log.info(c + " is unlighted")
+    
+    case Blinked(c: Color) =>
+      log.info(c + " has blinked")
+      
     case Terminated(`controler`) =>
-      println("Led Registry terminated")
+      log.info("Led Registry terminated")
       controler ! Shutdown
       context.system.terminate()
 
