@@ -31,8 +31,10 @@ which leads on the breadboard to
 - #23 / Pin16 => Yellow LED
 - #24 / Pin18 => Red LED
 - #25 / Pin22 => Blue (control) LED
+
 (do not forget the resistors)
-More details on http://pi4j.com/pins/model-3b-rev1.html
+
+My T-cobbler (on the picture) is for an unknown PI model. Pin numbers relate to the Raspberry Pi 3B expansion header. More details on http://pi4j.com/pins/model-3b-rev1.html
 
 <img src="https://raw.githubusercontent.com/lsarrazin/Akka2RaspberryPi/master/Breadboard-small.jpg" alt="Breadboard with LEDs" height="277px" width="446px"/>
 
