@@ -9,7 +9,7 @@ It is made of two sbt sub-projects :
 
 # Network configuration notice
 Both client & controller communicate through messages, based on TCP.
-In this implementation, the following are assumed :
+In this implementation, the following is assumed :
 - the Raspberry Pi responds to 192.168.1.51:2553
 - the remote client responds to 192.168.1.30:2552
 
@@ -40,6 +40,7 @@ My T-cobbler (on the picture below) is for an unknown PI model. Pin numbers rela
 
 # Dependency
 The GPIO is addressed through Pi4J (here http://pi4j.com/ or here https://github.com/Pi4J/pi4j/)
+
 For convenience, it is fetched from sbt through
 
 ```scala
