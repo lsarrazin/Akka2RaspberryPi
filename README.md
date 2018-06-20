@@ -3,7 +3,7 @@ Control my Raspberry Pi 3B 's GPIO from Akka (with remote client)
 
 # What's that about ?
 This project is a test run of Akka with Raspberry Pi 3B.
-It is made of two sbt sub-projects :
+It is made of three sbt sub-projects :
 - akkaPiClient is a remote client (run it on your desktop)
 - akkaPiController is a Pi GPIO controller implementing LEDs (wired on a breadboard)
 - akkaPiHttpClient is an API basic client that controls the LEDs through APIs
