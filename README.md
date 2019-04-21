@@ -48,11 +48,11 @@ For convenience, it is fetched from sbt through
 lazy val remoteMavenRepo = "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
 resolvers += remoteMavenRepo
 
-lazy val pi4jVersion = "1.1"
+lazy val pi4jVersion = "1.2"
 libraryDependencies += "com.pi4j" % "pi4j-core" % pi4jVersion
 ```
 
-On my PI 3B that is not (yet) recognized, I need to push the following definition to the JVM `-Dpi4j.linking=dynamic`
+In case your PI3B is not (yet) recognized, You'll need to push the following definition to the JVM `-Dpi4j.linking=dynamic`
 
 This can easily be done through sbt using
 ```ksh
