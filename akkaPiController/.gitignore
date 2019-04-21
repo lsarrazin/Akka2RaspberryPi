@@ -17,3 +17,4 @@ logs
 .project
 .cache-main
 .settings/
+bin/

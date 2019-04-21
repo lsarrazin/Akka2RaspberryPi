@@ -14,7 +14,8 @@ object PIGpio {
   val leds = List(
     ("gLED", RaspiPin.GPIO_03),
     ("yLED", RaspiPin.GPIO_04),
-    ("rLED", RaspiPin.GPIO_05))
+    ("rLED", RaspiPin.GPIO_05),
+    ("bLED", RaspiPin.GPIO_06))
   
   // Props
   def props(): Props = Props(new PIGpio(leds))
@@ -24,6 +25,7 @@ object PIGpio {
   final case class Low(name: String)
   final case class GetState(name: String)
   final case class StatusResponse(name: String, status: String)
+  final case object Acknowledge
 
 }
 
@@ -36,6 +38,7 @@ class PIGpio(pins: Seq[(String, Pin)]) extends Actor
   // val log = Logging(context.system, this)
   var gpio: Option[GpioController] = None
   var leds: Map[String, GpioPinDigitalOutput] = Map()
+  var cled: Option[GpioPinDigitalOutput] = None
 
   def initController: Unit = {
     val controller = GpioFactory.getInstance
@@ -46,6 +49,7 @@ class PIGpio(pins: Seq[(String, Pin)]) extends Actor
           led.setShutdownOptions(true, PinState.LOW)
           (name, led)
       }.toMap
+    cled = leds.get("bLED")
     gpio = Some(controller)
   }
 
@@ -88,7 +92,14 @@ class PIGpio(pins: Seq[(String, Pin)]) extends Actor
   }
   
   def receive = {
-    case High(name) => { 
+    case Acknowledge => {
+        cled.get.high
+        Thread.sleep(50)
+        cled.get.low
+      }
+    
+    case High(name) => {
+        self ! Acknowledge
         val led = getPin(name)
         if (led.isDefined) {
           log.info("Turning LED {} on", name)
@@ -97,7 +108,9 @@ class PIGpio(pins: Seq[(String, Pin)]) extends Actor
           log.error("LED {} is not defined", name )
         }
       }
+    
     case Low(name) => {
+        self ! Acknowledge
         val led = getPin(name)
         if (led.isDefined) {
           log.info("Turning LED {} off", name)
@@ -106,12 +119,14 @@ class PIGpio(pins: Seq[(String, Pin)]) extends Actor
           log.error("LED {} is not defined", name )
         }
       }
+    
     case GetState(name) => {
+        self ! Acknowledge
         val status = getPin(name).getOrElse((null, name, "undefined"))
         log.error("LED {} is {}", status._2, status._3)
         sender() ! StatusResponse(status._2, status._3)
       }
+    
   }
 }
-
 
