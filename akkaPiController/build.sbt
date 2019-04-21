@@ -19,9 +19,7 @@ libraryDependencies ++= Seq(
 lazy val remoteMavenRepo = "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
 resolvers += remoteMavenRepo
 
-lazy val pi4jVersion = "1.1"
+lazy val pi4jVersion = "1.2"
 
 libraryDependencies += "com.pi4j" % "pi4j-core" % pi4jVersion
-
-javaOptions in Runtime += "-Dpi4j.linking=dynamic" 
 
