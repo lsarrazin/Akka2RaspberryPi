@@ -15,7 +15,6 @@ object PILed {
   case object LightOn
   case object LightOff
   case class  Blink(duration: Long, pulse: Int)
-
   case class  BlinkContinuation(duration: Long, pulse: Int)
   case class  BlinkTermination(duration: Long, pulse: Int)
 }
